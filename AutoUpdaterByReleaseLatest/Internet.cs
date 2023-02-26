@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,11 +10,14 @@ namespace AutoUpdaterByReleaseLatest
 {
     public class Internet
     {
-        public bool OK()
+        public static bool OK()
         {
 			try
 			{
-                Dns.GetHostEntry("");
+                using (HttpClient http = new HttpClient())
+                {
+                    http.GetAsync("https://github.com/");
+                }
                 return true;
 			}
 			catch
